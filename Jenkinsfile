@@ -1,10 +1,10 @@
 pipeline {
     agent any
 
-    environment{
-        --
-        --
-    }
+//     environment{
+//         --
+//         --
+//     }
 
     tools{
         maven 'mvn'
