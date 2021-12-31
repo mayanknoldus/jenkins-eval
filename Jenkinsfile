@@ -35,26 +35,25 @@ pipeline {
             }
         }
 
-        stage('Deploy the Code') {
+        stage('Package and Deploy the Code') {
             when {
                 branch 'Production'
             }
             stages {
-                stage {
+                stage('Package the Code') {
                     steps {
                         sh 'mvn package'
                     }
                 }
                 
-                stage {
+                stage('Deploy') {
                     steps {
                         sshPublisher(publishers: [sshPublisherDesc(configName: 'deploy', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: 'java -jar hello-0.0.1-SNAPSHOT.jar &', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '/home/ubuntu', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '**/*.jar ')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
                     }
                 }
             }
-            
-            
         }
+
     }
 
     post {
