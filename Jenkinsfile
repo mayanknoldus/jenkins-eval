@@ -40,15 +40,27 @@ pipeline {
             when {
                 branch 'Production'
             }
-            steps {
-                sh 'mvn package'
+            stages {
+                stage {
+                    steps {
+                        sh 'mvn package'
+                    }
                 }
+                
+                stage {
+                    steps {
+                        sshPublisher(publishers: [sshPublisherDesc(configName: 'deploy', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: 'java -jar hello-0.0.1-SNAPSHOT.jar &', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '/home/ubuntu', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '**/*.jar ')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
+                    }
+                }
+            }
+            
+            
         }
     }
 
     post {
         always {
-            emailext attachLog: true, body: '$DEFAULT_CONTENT', subject: '$DEFAULT_SUBJECT', to: 'mayank.verma@knoldus.com'
+            mail bcc: '', body: 'Hi there,', cc: '', from: '', replyTo: '', subject: 'Test Email', to: 'mayankkverma1999@gmail.com'
         }
     }
 }
