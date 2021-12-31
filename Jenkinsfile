@@ -51,7 +51,6 @@ pipeline {
                         sshPublisher(publishers: [sshPublisherDesc(configName: 'deploy', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: 'cd /home/ubuntu/home/ubuntu/target &&  java -jar hello-0.0.1-SNAPSHOT.jar &', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '/home/ubuntu', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '**/*.jar ')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
                     }
                 }
-                }
             }
         }
 
