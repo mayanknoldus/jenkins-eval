@@ -1,9 +1,7 @@
 pipeline {
     agent any
 
-//     environment{
-  
-//     }
+
 
     tools{
         maven 'mvn'
@@ -71,4 +69,4 @@ pipeline {
 
 
 
-// pipeline systax
+
